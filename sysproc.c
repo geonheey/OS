@@ -89,3 +89,54 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+// nueva syscal: SYS_date
+// return current date
+int
+sys_date(void)
+{
+  
+  struct rtcdate *date;
+  
+  if (argptr(0, (void*)&date, sizeof(struct rtcdate*)) < 0)
+    return -1;
+
+  cmostime(date);
+
+  return 0;
+}
+
+int
+sys_alarm(void)
+{
+    int ticks; 
+
+    if (argint(0, &ticks) < 0)
+        return -1;
+
+    myproc()->alarmticks = ticks;
+    myproc()->alarm_timer = ticks; 
+    
+    return 0;
+}
+// getvp() 시스템 호출 구현 예시
+int sys_getvp() {
+    struct proc *curproc = myproc();
+    return curproc->sz / PGSIZE;
+}
+
+// getpp() 시스템 호출 구현 예시
+int sys_getpp() {
+    struct proc *curproc = myproc();
+    int count = 0;
+
+    // 메모리 페이지 테이블을 순회하여 실제 할당된 물리 페이지 수를 계산
+    for (int i = 0; i < curproc->sz / PGSIZE; i++) {
+        if (/* 페이지가 할당되어 있는지 확인 */) {
+            count++;
+        }
+    }
+
+    return count;
+}
+

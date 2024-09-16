@@ -29,3 +29,11 @@ SYSCALL(getpid)
 SYSCALL(sbrk)
 SYSCALL(sleep)
 SYSCALL(uptime)
+
+# nueva syscall: SYS_date
+SYSCALL(date)
+SYSCALL(alarm)
+
+SYSCALL(getvp)
+SYSCALL(getpp)
+

@@ -20,3 +20,12 @@
 #define SYS_link   19
 #define SYS_mkdir  20
 #define SYS_close  21
+// nueva syscall: SYS_date
+#define SYS_date   22
+#define SYS_alarm  23
+#define SYS_getvp  24
+#define SYS_getpp  25
+
+
+
+
